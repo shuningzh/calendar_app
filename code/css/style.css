@@ -1,0 +1,133 @@
+* {
+	box-sizing: border-box;
+}
+
+/******* fonts used ********/
+@font-face {
+	font-family: Alegreya;
+	src: url("../fonts/Alegreya/Alegreya-Regular.ttf");
+}
+
+@font-face {
+	font-family: TurretRoad;
+	src: url("../fonts/TurretRoad/TurretRoad-Bold.ttf");
+}
+
+@font-face {
+	font-family: JosefinSans;
+	src: url(../fonts/JosefinSans-VariableFont_wght.ttf);
+}
+
+@font-face {
+	font-family: Cinzel;
+	src: url(../fonts/Cinzel-VariableFont_wght.ttf);
+}
+
+
+body {
+	font-family: Alegreya;
+	background-color: #cae9ff;
+}
+
+/*************** Style for navbar ***************/
+/* nav-brand icon*/
+.icon {
+	font-size: 140%;
+	margin-top: -5px;
+	margin-right: 10px;
+}
+
+#nav {
+	background-color: #1b4965;
+	font-size: 120%;
+	padding-right: 0px;
+	padding-left: 10px;
+	height: 55px;
+}
+/* hyperlink color */
+#nav a {
+	color: white;
+}
+
+#navbarDropdown {
+	font-size: 140%;
+}
+
+#weather {
+	cursor: default;
+	color: white;
+}
+
+#weather p {
+	display: block;
+	padding: 0;
+	padding-left: 8px;
+	margin: 0;
+}
+
+.active-nav {
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.inactive-nav:hover {
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* dropdown icon */
+.dropdown-menu {
+	font-size: 120%;
+}
+
+/* dropdown text color */
+#dropdown-option a {
+	color: black;
+}
+
+.nav-search-bar {
+	margin-left: 2%;
+}
+
+
+.nav-divider {
+	height: 55px;
+}
+
+/**** bottom search bar ****/
+.bottom-bar {
+	display: none;
+}
+.bottom-search-bar {
+	background-color: #1b4965;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-right: 1%;
+	padding-left: 1%;
+}
+
+.bottom-search-bar input {
+	width: 74%;
+	margin-right: 1%;
+}
+.bottom-search-bar button {
+	width: 25%;
+}
+
+.bottom-divider {
+	height:35px;
+}
+
+.error {
+	display: none;
+	color: red;
+}
+
+
+/********** reponsive ***********/
+@media (max-width: 767px) {
+	.nav-search-bar {
+		display: none;
+	}
+	.bottom-bar {
+		display: block;
+	}
+}

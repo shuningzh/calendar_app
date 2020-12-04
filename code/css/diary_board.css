@@ -1,0 +1,91 @@
+#dcards {
+	width: 96%;
+	margin-top: 15px;
+	margin-left: 2%;
+	margin-right: 2%;
+}
+
+#dropdown-option {
+	z-index: 5000;
+}
+
+.card:hover {
+	cursor: pointer;
+}
+.card-header {
+	padding: 0;
+}
+
+.card-header span {
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 20px;
+}
+
+.card-header span, .shown {
+	overflow: hidden;
+	white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.card-header div.minimize{
+	padding-left: 10px;
+	padding-right: 10px;
+	font-size: 20px;
+	display: none;
+}
+#dcards .fas {
+	color: #ee4957;
+}
+.card-header div.like, .like-unloggedin {
+	padding-left: 10px;
+	padding-right: 10px;
+	font-size: 20px;
+}
+
+.minimize:hover, .like:hover {
+	background-color: lightgray;
+}
+
+
+
+.diary-entry  {
+	width: 31.33%;
+	margin-left: 1%;
+	margin-right: 1%;
+	margin-bottom: 10px;
+}
+.complete {
+	display: none;
+}
+
+.onClick {
+	width: 98% !important;
+}
+
+.card {
+	transition: all 1s ease-in-out;
+}
+#boardicon {
+	display: none;
+}
+
+@media (max-width: 991px) {
+	.diary-entry {
+		width: 48%;
+	}
+}
+
+@media (max-width: 767px) {
+	.diary-entry {
+		width: 98%;
+	}
+	#boardicon {
+		display: inline;
+	}
+	#boardicon + span, #nav #home {
+		display: none !important;
+	}
+}

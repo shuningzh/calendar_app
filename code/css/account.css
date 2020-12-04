@@ -1,0 +1,84 @@
+.wrapper {
+	width: 80%;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	background-color: #e8f1f2;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	padding-left: 3%;
+	padding-right: 3%;
+}
+
+#boardicon {
+	display: none;
+}
+
+#changepassword-wrapper {
+	width: 100%;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 5000;
+	background-color: rgba(0, 0, 0, 0.6);
+	display: none;
+}
+
+#form-wrapper {
+	background-color: white;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-left: 3%;
+	padding-right: 3%;
+	width: 50%;
+	margin-left: 25%;
+	margin-right: 25%;
+	border-radius: 20px;
+	position: absolute;
+	top: 50%;
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+#form-wrapper .btn-secondary {
+	margin-left: 5px;
+}
+
+#update-button {
+	display: none;
+}
+
+.avatar {
+	border-radius: 50%;
+	width: 100px;
+}
+
+.header + hr {
+	width: 60%;
+}
+
+@media(max-width: 767px) {
+	.wrapper {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+	#form-wrapper {
+		width: 90%;
+		margin-left: 5%;
+		margin-right: 5%;
+	}
+	#edit-div, #update-button {
+		margin-bottom: 5px;
+	}
+	#boardicon {
+		display: inline;
+	}
+	#boardicon + span {
+		display: none;
+	}
+	#home {
+		display: none;
+	}
+}
