@@ -21,7 +21,11 @@
 		echo $mysqli->error;
 	}
 	if($statement->affected_rows == 1) {
-		echo "true";
+		$php_array = [
+			"id" => $mysqli->insert_id,
+			"success" => true
+		];
+		echo json_encode($php_array);
 	} else {
 		echo $statement->affected_rows;
 	}

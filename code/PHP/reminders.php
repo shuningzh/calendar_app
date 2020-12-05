@@ -8,8 +8,13 @@
 		exit();
 	}
 	if (isset($_POST["title"]) && !empty($_POST["title"])) {
+		$deadline = null;
+		if (isset($_POST["deadline"]) && !empty($_POST["deadline"])) {
+			$deadline = $_POST["deadline"];
+		}
+		
 		$statement = $mysqli->prepare("UPDATE reminders SET title = ?, deadline = ?, notes = ? WHERE userid = ? AND id = ?");
-		$statement->bind_param("sssii", $_POST["title"], $_POST["deadline"], $_POST["notes"], $userid, $_POST["id"]);
+		$statement->bind_param("sssii", $_POST["title"], $deadline, $_POST["notes"], $userid, $_POST["id"]);
 
 		$executed = $statement->execute();
 		if(!$executed) {

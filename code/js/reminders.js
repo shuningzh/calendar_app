@@ -330,6 +330,15 @@ $(".range #searchform2").on("submit", function(event) {
 
 });
 
+function isJson(json) {
+	try {
+		JSON.parse(json);
+	} catch(e) {
+		return false;
+	}
+	return true;
+}
+
 $(".add form").on("submit", function(event) {
 	event.preventDefault();
 	let item = $("#content").val().trim();
@@ -346,72 +355,82 @@ $(".add form").on("submit", function(event) {
 		let date = `${mo} ${da}, ${ye}`;
 		let data = "title=" + encodeURIComponent(item) + "&deadline=" + $("#deadline").val() + "&notes=&status=0&user=" + current_user_id;
 		ajaxCreate(data, function(results) {
-			if (results == "true") {
-				let found = false;
-				let smaller = null;
-				$(".card").each(function(){
-					if ($(this).find(".date").html() == date) {
-						$(this).find("ul").append("<li class='list-group-item list-group-item-action d-flex flex-row justify-content-start'><div class='d-flex flex-column justify-content-center button check'><i class='far fa-square'></i></div><div class='item'><span>"+ item +"</span></div><div class='flex-grow-1'></div><div class='d-flex flex-column justify-content-center button edit'><i class='fas fa-edit'></i></div><div class='d-flex flex-column justify-content-center button trash'><i class='far fa-trash-alt'></i></div><div class='notes'></div></li>");
+			if (isJson(results)) {
+				results = JSON.parse(results);
+				if (results.success == true) {
+					let found = false;
+					let smaller = null;
+					$(".card").each(function(){
+						if ($(this).find(".date").html() == date) {
+							$(this).find("ul").append("<li class='list-group-item list-group-item-action d-flex flex-row justify-content-start' data-id='" + results.id + "' data-notes=''><div class='d-flex flex-column justify-content-center button check'><i class='far fa-square'></i></div><div class='item'><span>"+ item +"</span></div><div class='flex-grow-1'></div><div class='d-flex flex-column justify-content-center button edit'><i class='fas fa-edit'></i></div><div class='d-flex flex-column justify-content-center button trash'><i class='far fa-trash-alt'></i></div></li>");
+							$("#content").val("");
+							$("#deadline").val("");
+							found = true;
+							return false;
+						} else {
+							let currDate = new Date($(this).find(".date").html());
+							if (currDate < d) {
+								smaller = $(this);
+							}
+						}
+					});
+					if (!found) {
+						let parent = $("#all");
+						let headerid = "head" + number;
+						let collapseid = "collapse" + number;
+						let newElement = "<div class='card'><div class='card-header' id="+ headerid +"><h2 class='mb-0'><button class='btn btn-link btn-block text-left shadow-none d-flex flex-row' type='button' data-toggle='collapse' data-target='#"+ collapseid + "' aria-expanded='true' aria-controls='" + collapseid + "'><div class='flex-grow-1 date'>" + date + "</div><div class='d-flex flex-column justify-content-center'><i class='far fa-caret-square-up'></i></div></button></h2></div><div id='" + collapseid + "' class='collapse multi-collapse show' aria-labelledby='" + headerid + "'><div class='card-body'><ul class='list-group text-wrap reminders'><li class='list-group-item list-group-item-action d-flex flex-row justify-content-start' data-id='" + results.id + "' data-notes=''><div class='d-flex flex-column justify-content-center button check'><i class='far fa-square'></i></div><div class='item'><span>" + item +"</span></div><div class='flex-grow-1'></div><div class='d-flex flex-column justify-content-center button edit'><i class='fas fa-edit'></i></div><div class='d-flex flex-column justify-content-center button trash'><i class='far fa-trash-alt'></i></div></li></ul></div></div></div>";
+						if (smaller != null) {
+							smaller.after(newElement);
+						} else {
+							parent.prepend(newElement);
+						}
+						number++;
 						$("#content").val("");
 						$("#deadline").val("");
-						found = true;
-						return false;
-					} else {
-						let currDate = new Date($(this).find(".date").html());
-						if (currDate < d) {
-							smaller = $(this);
-						}
 					}
-				});
-				if (!found) {
-					let parent = $("#all");
-					let headerid = "head" + number;
-					let collapseid = "collapse" + number;
-					let newElement = "<div class='card'><div class='card-header' id="+ headerid +"><h2 class='mb-0'><button class='btn btn-link btn-block text-left shadow-none d-flex flex-row' type='button' data-toggle='collapse' data-target='#"+ collapseid + "' aria-expanded='true' aria-controls='" + collapseid + "'><div class='flex-grow-1 date'>" + date + "</div><div class='d-flex flex-column justify-content-center'><i class='far fa-caret-square-up'></i></div></button></h2></div><div id='" + collapseid + "' class='collapse multi-collapse show' aria-labelledby='" + headerid + "'><div class='card-body'><ul class='list-group text-wrap reminders'><li class='list-group-item list-group-item-action d-flex flex-row justify-content-start'><div class='d-flex flex-column justify-content-center button check'><i class='far fa-square'></i></div><div class='item'><span>" + item +"</span></div><div class='flex-grow-1'></div><div class='d-flex flex-column justify-content-center button edit'><i class='fas fa-edit'></i></div><div class='d-flex flex-column justify-content-center button trash'><i class='far fa-trash-alt'></i></div><div class='notes'></div></li></ul></div></div></div>";
-					if (smaller != null) {
-						smaller.after(newElement);
-					} else {
-						parent.prepend(newElement);
-					}
-					number++;
-					$("#content").val("");
-					$("#deadline").val("");
+					$("#from1").val("");
+					$("#to1").val("");
+					$("#from2").val("");
+					$("#to2").val("");
+				} else {
+					alert("error");
 				}
-				$("#from1").val("");
-				$("#to1").val("");
-				$("#from2").val("");
-				$("#to2").val("");
 			} else {
-				alert("error");
+				console.log(results);
 			}
 		});
 	} else if ($("#deadline").val() == "") {
 		let data = "title=" + encodeURIComponent(item) + "&deadline=&notes=&status=0&user=" + current_user_id;
 		ajaxCreate(data, function(results) {
-			let found = false;
-			$(".card").each(function(){
-				if ($(this).find(".date").html() == "Undated") {
-					$(this).find("ul").append("<li class='list-group-item list-group-item-action d-flex flex-row justify-content-start'><div class='d-flex flex-column justify-content-center button check'><i class='far fa-square'></i></div><div class='item'><span>"+ item +"</span></div><div class='flex-grow-1'></div><div class='d-flex flex-column justify-content-center button edit'><i class='fas fa-edit'></i></div><div class='d-flex flex-column justify-content-center button trash'><i class='far fa-trash-alt'></i></div><div class='notes'></div></li>");
-					$("#content").val("");
-					$("#deadline").val("");
-					found = true;
-					return false;
+			if (isJson(results)) {
+				results = JSON.parse(results);
+				if (results.success == true) {
+					let found = false;
+					$(".card").each(function(){
+						if ($(this).find(".date").html() == "Undated") {
+							$(this).find("ul").append("<li class='list-group-item list-group-item-action d-flex flex-row justify-content-start' data-id='" + results.id + "' data-notes=''><div class='d-flex flex-column justify-content-center button check'><i class='far fa-square'></i></div><div class='item'><span>"+ item +"</span></div><div class='flex-grow-1'></div><div class='d-flex flex-column justify-content-center button edit'><i class='fas fa-edit'></i></div><div class='d-flex flex-column justify-content-center button trash'><i class='far fa-trash-alt'></i></div></li>");
+							$("#content").val("");
+							$("#deadline").val("");
+							found = true;
+							return false;
+						}
+					});
+					if (!found) {
+						let parent = $("#all");
+						let headerid = "head" + number;
+						let collapseid = "collapse" + number;
+						let newElement = "<div class='card'><div class='card-header' id="+ headerid +"><h2 class='mb-0'><button class='btn btn-link btn-block text-left shadow-none d-flex flex-row' type='button' data-toggle='collapse' data-target='#"+ collapseid + "' aria-expanded='true' aria-controls='" + collapseid + "'><div class='flex-grow-1 date'>Undated</div><div class='d-flex flex-column justify-content-center'><i class='far fa-caret-square-up'></i></div></button></h2></div><div id='" + collapseid + "' class='collapse multi-collapse show' aria-labelledby='" + headerid + "'><div class='card-body'><ul class='list-group text-wrap reminders'><li class='list-group-item list-group-item-action d-flex flex-row justify-content-start' data-id='" + results.id + "' data-notes=''><div class='d-flex flex-column justify-content-center button check'><i class='far fa-square'></i></div><div class='item'><span>" + item +"</span></div><div class='flex-grow-1'></div><div class='d-flex flex-column justify-content-center button edit'><i class='fas fa-edit'></i></div><div class='d-flex flex-column justify-content-center button trash'><i class='far fa-trash-alt'></i></div></li></ul></div></div></div>";
+						parent.append(newElement);
+						number++;
+						$("#content").val("");
+						$("#deadline").val("");
+					}
+					$("#from1").val("");
+					$("#to1").val("");
+					$("#from2").val("");
+					$("#to2").val("");
 				}
-			});
-			if (!found) {
-				let parent = $("#all");
-				let headerid = "head" + number;
-				let collapseid = "collapse" + number;
-				let newElement = "<div class='card'><div class='card-header' id="+ headerid +"><h2 class='mb-0'><button class='btn btn-link btn-block text-left shadow-none d-flex flex-row' type='button' data-toggle='collapse' data-target='#"+ collapseid + "' aria-expanded='true' aria-controls='" + collapseid + "'><div class='flex-grow-1 date'>Undated</div><div class='d-flex flex-column justify-content-center'><i class='far fa-caret-square-up'></i></div></button></h2></div><div id='" + collapseid + "' class='collapse multi-collapse show' aria-labelledby='" + headerid + "'><div class='card-body'><ul class='list-group text-wrap reminders'><li class='list-group-item list-group-item-action d-flex flex-row justify-content-start'><div class='d-flex flex-column justify-content-center button check'><i class='far fa-square'></i></div><div class='item'><span>" + item +"</span></div><div class='flex-grow-1'></div><div class='d-flex flex-column justify-content-center button edit'><i class='fas fa-edit'></i></div><div class='d-flex flex-column justify-content-center button trash'><i class='far fa-trash-alt'></i></div><div class='notes'></div></li></ul></div></div></div>";
-				parent.append(newElement);
-				number++;
-				$("#content").val("");
-				$("#deadline").val("");
 			}
-			$("#from1").val("");
-			$("#to1").val("");
-			$("#from2").val("");
-			$("#to2").val("");
 		});
 	} else {
 		alert("Invalid Date!");

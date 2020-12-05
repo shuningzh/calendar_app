@@ -1,4 +1,4 @@
-let apikey = /*your own api key*/;
+let apikey = "apikey";  /*your own api key*/
 
 $(window).on("load", function(event) {
 	if (current_user_id != -1 && cityid != 0) {
