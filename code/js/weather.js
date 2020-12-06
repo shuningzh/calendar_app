@@ -1,4 +1,4 @@
-let apikey = "apikey";  /*your own api key*/
+let apikey = "";  /*your own api key*/
 
 $(window).on("load", function(event) {
 	if (current_user_id != -1 && cityid != 0) {
@@ -21,6 +21,7 @@ function updateWeather(cityId) {
 		$("#weather p").html(temp);
 		$("#weather").css("padding-right", "10px");
 		let icon = results.weather[0].icon;
+		$("#weather .weathericon").empty();
 		if (icon == "01d" || icon == "01n") { // clear sky
 			$("#weather .weathericon").prepend("<i class='fas fa-sun'></i>");
 		} else if (icon == "02d" || icon == "02n") { // few clouds
