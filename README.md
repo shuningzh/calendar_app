@@ -1,9 +1,9 @@
-#Software Requirements
+# Software Requirements
 1. [MAMP](https://www.mamp.info/en/downloads/)
 2. [MySQL Workbench](https://dev.mysql.com/downloads/workbench/)
 3. Web Browser
 
-#Instructions
+# Instructions
 1. Import MySQL database from `db.sql` file.
 	1. If the city you want for locations is not inserted in `db.sql`, you can try to find the corresponding cityid in `cities.json` and run this SQL statement: `INSERT INTO locations (cityid, cityname, state, country) VALUES (?, ?, ?, ?)`.
 	2. If you cannot find your city in `cities.json`, check out [this](http://bulk.openweathermap.org/sample/) from [OpenWeather API](https://openweathermap.org/current#cityid).
