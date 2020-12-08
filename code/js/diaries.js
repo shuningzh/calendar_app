@@ -214,7 +214,6 @@ $("#edit-detail").on("submit", function(event) {
 $(".dsearch").on("submit", function(event) {
 	event.preventDefault();
 	let input = $.trim($(this).find("input").val());
-	console.log("input: " + input);
 	if (input.length == 0) {
 		$(".card").css("display", "flex");
 	} else {
