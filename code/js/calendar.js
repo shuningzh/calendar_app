@@ -27,8 +27,8 @@ $(".calendar").on("click", ".day", function(event) {
 			let container = $("#sm-events .content-container");
 			let prevdate = new Date(container.find("h3").html());
 			if ( !isNaN(prevdate.getTime()) ) {
-				let mo = prevdate.getMonth() + 1;
-				let day = prevdate.getDate();
+				let mo = ("0" + (prevdate.getMonth() + 1)).slice(-2);
+				let day = ("0" + prevdate.getDate()).slice(-2);
 				let prevId = "#" + mo + "-" + day;
 				let prevDay = $(prevId);
 				let events = $("#sm-events").find(".events");
@@ -84,8 +84,8 @@ $(window).resize(function() {
 		let container = $("#sm-events .content-container");
 		let prevdate = new Date(container.find("h3").html());
 		if ( !isNaN(prevdate.getTime()) ) {
-			let mo = prevdate.getMonth() + 1;
-			let day = prevdate.getDate();
+			let mo = ("0" + (prevdate.getMonth() + 1)).slice(-2);
+			let day = ("0" + prevdate.getDate()).slice(-2);
 			let prevId = "#" + mo + "-" + day;
 			let prevDay = $(prevId);
 			let events = $("#sm-events").find(".events");
@@ -264,13 +264,13 @@ $(".form-wrapper .wrapper form").on("submit", function(event) {
 			if (isJson(results)) {
 				results = JSON.parse(results);
 				if (results.success == true) {
-					let startStr = $(".day").first().attr("id") + " " + $("#year1").html();
-					let monthStart = new Date(startStr + " 00:00:00");
+					let startStr = $("#year1").html() + "-" + $(".day").first().attr("id");
+					let monthStart = new Date(startStr + "T00:00:00");
 					if ($("#month1").html() == "January" && monthStart.getMonth() == 11) {
 						monthStart.setFullYear(monthStart.getFullYear() - 1);
 					}
-					let endStr = $(".day").last().attr("id") + " " + $("#year1").html();
-					let monthEnd = new Date(endStr + " 00:00:00");
+					let endStr = $("#year1").html() + "-" + $(".day").last().attr("id");
+					let monthEnd = new Date(endStr + "T00:00:00");
 					if ($("#month1").html() == "December" && monthEnd.getMonth() == 0) {
 						monthEnd.setFullYear(monthEnd.getFullYear() + 1);
 					}
@@ -350,7 +350,7 @@ function displayNewEvent(title, start, end, id, location, notes) {
 	let now = new Date();
 	let eventid = "e" + id;
 	let startTime = start.getHours() + ":" + ("0" + start.getMinutes()).slice(-2);
-	let sid = "#" + (start.getMonth() + 1) + "-" + start.getDate();
+	let sid = "#" + ( "0" + (start.getMonth() + 1) ).slice(-2) + "-" + ( "0" + start.getDate() ).slice(-2);
 
 	let ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(start);
 	let mo = new Intl.DateTimeFormat('en', { month: '2-digit' }).format(start);
@@ -416,7 +416,7 @@ function displayNewEvent(title, start, end, id, location, notes) {
 			temp.setDate(temp.getDate() + 1);
 		}
 		while ( temp.getTime() <= end.getTime() ) {
-			let dayid = "#" + (temp.getMonth() + 1) + "-" + temp.getDate();
+			let dayid = "#" + ("0" + (temp.getMonth() + 1)).slice(-2) + "-" + ("0" + temp.getDate()).slice(-2);
 			limit = $(dayid).height() - $(dayid).children().first().height();
 			let div = "<div class='" + eventid + "'  data-id='" + id + "' data-location='" + location + "' data-notes='" + notes + "' data-start='" + startStr + "' data-end='" + endStr + "'><small class='d-flex flex-row justify-content-start'><div class='d-flex flex-column justify-content-center'><i class='far fa-circle'></i></div><span class='event-title'>" + title + "</span><span class='flex-grow-1'></span></small></div>";
 			let newPosition = null;

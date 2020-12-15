@@ -91,7 +91,9 @@ function displayAll(date) {
 		if (startDate.getMonth() != date.getMonth()) {
 			inactive = " inactive-day";
 		}
-		let newDay = "<div class='"+ row +" "+ col + inactive +" day' id='" + (startDate.getMonth()+1) + "-" + startDate.getDate() + "'><div>"+ startDate.getDate() +"</div><div class='events'></div></div>";
+		let month = ( "0" + (startDate.getMonth()+1) ).slice(-2);
+		let day = ( "0" + (startDate.getDate()) ).slice(-2);
+		let newDay = "<div class='"+ row +" "+ col + inactive +" day' id='" + month + "-" + day + "'><div>"+ startDate.getDate() +"</div><div class='events'></div></div>";
 		$(".calendar").append(newDay);
 		startDate.setDate(startDate.getDate() + 1);
 	}
@@ -191,7 +193,7 @@ function getReminders(start, end) {
 				let date = new Date(results[i].deadline + "T00:00:00");
 				let title = results[i].title;
 				let reminderid = results[i].id;
-				let id = "#" + (date.getMonth() + 1) + "-" + date.getDate();
+				let id = "#" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2);
 				if (results[i].finished == "0") {
 					$(id).find(".events").append("<div class='r" + reminderid + "' data-id='" + reminderid + "'><small class='d-flex flex-row justify-content-start'><div class='d-flex flex-column justify-content-center'><i class='far fa-square'></i></div><span class='event-title'>" + title + "</span></small></div>");
 				} else {
@@ -282,12 +284,12 @@ function getEvents(start, end) {
 			results = JSON.parse(results);
 			let now = new Date();
 			for (let i = 0; i < results.length; i++) {
-				let sdate = new Date(results[i].start_time);
-				let edate = new Date(results[i].end_time);
+				let sdate = new Date(results[i].start_time.replace(/\s/, 'T'));
+				let edate = new Date(results[i].end_time.replace(/\s/, 'T'));
 				let title = results[i].title;
 				let eventid = "e" + results[i].id;
 				let startTime = sdate.getHours() + ":" + ("0" + sdate.getMinutes()).slice(-2);
-				let sid = "#" + (sdate.getMonth() + 1) + "-" + sdate.getDate();
+				let sid = "#" + ( "0" +  (sdate.getMonth() + 1) ).slice(-2) + "-" + ( "0" + sdate.getDate() ).slice(-2);
 				let limit = $(sid).height() - $(sid).children().first().height();
 				if (edate.getTime() > now.getTime()) {
 					$(sid).find(".events").append("<div class='" + eventid + "'data-id='" + results[i].id + "' data-start='" + results[i].start_time + "' data-end='" + results[i].end_time + "' data-location='" + results[i].location + "' data-notes='" + results[i].notes + "'><small class='d-flex flex-row justify-content-start'><div class='d-flex flex-column justify-content-center'><i class='far fa-circle'></i></div><span class='event-title'>" + title + "</span><span class='flex-grow-1'></span><span class='time'>" + startTime + "</span></small></div>");
@@ -305,7 +307,7 @@ function getEvents(start, end) {
 						temp.setDate(temp.getDate() + 1);
 					}
 					while ( temp.getTime() <= end.getTime() && temp.getTime() <= edate.getTime() ) {
-						let id = "#" + (temp.getMonth() + 1) + "-" + temp.getDate();
+						let id = "#" + ( "0" + (temp.getMonth() + 1) ).slice(-2) + "-" + ( "0" + temp.getDate() ).slice(-2);
 						limit = $(id).height() - $(id).children().first().height();
 						if (edate.getTime() > now.getTime()) {
 							$(id).find(".events").append("<div class='" + eventid + "' data-id='" + results[i].id + "' data-start='" + results[i].start_time + "' data-end='" + results[i].end_time + "' data-location='" + results[i].location + "' data-notes='" + results[i].notes + "'><small class='d-flex flex-row justify-content-start'><div class='d-flex flex-column justify-content-center'><i class='far fa-circle'></i></div><span class='event-title'>" + title + "</span><span class='flex-grow-1'></span></small></div>");

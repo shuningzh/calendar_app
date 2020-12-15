@@ -156,7 +156,7 @@ else {
 						<option selected value="NA">Choose...</option>
 <?php
 	while( $row = $countries->fetch_assoc() ) {
-		if ($row["country"] == $userlocation["country"]) {
+		if ($userlocation != null && $row["country"] == $userlocation["country"]) {
 			echo "<option selected value='" . $row["country"] . "'>" . $row["country"] . "</option>";
 		} else {
 			echo "<option value='" . $row["country"] . "'>" . $row["country"] . "</option>";
@@ -182,7 +182,7 @@ else {
 		}
 		sort($array);
 		foreach ($array as $s) {
-			if ( $s == $userlocation["state"]) {
+			if ($userlocation != null && $s == $userlocation["state"]) {
 				echo "<option selected value='" . $s . "'>" . $s . "</option>";
 				$selectedState = $s;
 			} else {
@@ -202,7 +202,7 @@ else {
 		$locations->data_seek(0);
 		while( $row = $locations->fetch_assoc() ) {
 			if ($row["state"] == $selectedState) {
-				if ( $row["cityid"] == $userlocation["cityid"] ) {
+				if ( $userlocation != null && $row["cityid"] == $userlocation["cityid"] ) {
 					echo "<option selected value='" . $row["cityid"] . "'>" . $row["cityname"] . "</option>";
 				} else {
 					echo "<option value='" . $row["cityid"] . "'>" . $row["cityname"] . "</option>";

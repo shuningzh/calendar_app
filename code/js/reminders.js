@@ -339,6 +339,7 @@ function isJson(json) {
 	return true;
 }
 
+
 $(".add form").on("submit", function(event) {
 	event.preventDefault();
 	let item = $("#content").val().trim();
