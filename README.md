@@ -23,3 +23,5 @@
 		8. keep clicking "Next" until you get to "Apply Configuration"
 		9. click "Execute"
 		10. The Installer will make all the configuration changes needed for you.
+
+## Try on [Website](https://skkkzhang.com/calendar/home.php)
