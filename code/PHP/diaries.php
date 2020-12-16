@@ -35,6 +35,12 @@
 			echo "true";
 		}
 	} else if ($_POST["order"] == "delete") {
+		$statement = $mysqli->prepare("DELETE FROM likes where diaryid = ?");
+		$statement->bind_param("i", $_POST["id"]);
+		$executed = $statement->execute();
+		if(!$executed) {
+			echo $mysqli->error;
+		}
 		$statement = $mysqli->prepare("DELETE FROM diaries where userid = ? AND id = ?");
 		$statement->bind_param("ii", $userid, $_POST["id"]);
 		$executed = $statement->execute();

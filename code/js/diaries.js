@@ -1,7 +1,7 @@
 $(window).on("load", function(event) {
 	let date = new Date();
 	$(".card").each(function(index, el) {
-		let edit = new Date($(this).data("edit"));
+		let edit = new Date($(this).data("edit").replace(/\s/, 'T'));
 		let diff = date.getFullYear() - edit.getFullYear();
 		if (diff == 0) {
 			diff = date.getMonth() - edit.getMonth();
@@ -134,6 +134,8 @@ $(".wrapper").on("click", ".card .btn-outline-danger", function(event) {
 			card.fadeOut('slow', function() {
 				card.remove();
 			});
+		} else {
+			console.log(results);
 		}
 	});
 });
