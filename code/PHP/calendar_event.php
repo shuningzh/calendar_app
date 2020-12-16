@@ -8,6 +8,7 @@
 		echo $mysqli->connect_error;
 		exit();
 	}
+	$mysqli->set_charset('utf8');
 	if (isset($start) && !empty($start)) {
 		$statement = "SELECT * FROM events WHERE userid = " . $userid . " AND ( (end_time >= '" . $start . "' AND end_time <= '" . $end . "') OR (start_time >= '" . $start . "' AND start_time <= '" . $end . "' ) ) ORDER BY start_time;";
 	} else {

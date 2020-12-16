@@ -7,7 +7,7 @@
 		echo $mysqli->connect_error;
 		exit();
 	}
-
+	$mysqli->set_charset('utf8');
 	$statement = $mysqli->prepare("INSERT INTO events(title, location, start_time, end_time, notes, userid) VALUES(?, ?, ?, ?, ?, ?)");
 	$statement->bind_param("sssssi", $_POST["title"], $_POST["location"], $_POST["start"], $_POST["end"], $_POST["notes"], $userid);
 

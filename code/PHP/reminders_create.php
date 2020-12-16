@@ -7,6 +7,7 @@
 		echo $mysqli->connect_error;
 		exit();
 	}
+	$mysqli->set_charset('utf8');
 	$deadline = null;
 	if (isset($_POST["deadline"]) && !empty($_POST["deadline"])) {
 		$deadline = $_POST["deadline"];

@@ -6,6 +6,7 @@
 		echo $mysqli->connect_error;
 		exit();
 	}
+	$mysqli->set_charset('utf8');
 	if (isset($_POST["id"]) && !empty($_POST["id"])) {
 		$statement = $mysqli->prepare("UPDATE reminders SET finished = ? WHERE userid = ? AND id = ?");
 		$statement->bind_param("iii", $_POST["status"], $userid, $_POST["id"]);

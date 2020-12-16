@@ -7,7 +7,7 @@
 		echo $mysqli->connect_error;
 		exit();
 	}
-
+	$mysqli->set_charset('utf8');
 	if ($_POST["order"] == "insert") {
 		$statement = $mysqli->prepare("INSERT INTO diaries(title, submitted_time, edit_time, content, visibility, userid) VALUES(?, ?, ?, ?, ?, ?)");
 		$statement->bind_param("ssssii", $_POST["title"], $_POST["submit"], $_POST["submit"], $_POST["content"], $_POST["visibility"], $userid);

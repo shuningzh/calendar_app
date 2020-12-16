@@ -7,6 +7,7 @@
 		echo $mysqli->connect_error;
 		exit();
 	}
+	$mysqli->set_charset('utf8');
 	if (isset($_POST["title"]) && !empty($_POST["title"])) {
 		$statement = $mysqli->prepare("UPDATE events SET title = ?, location = ?, start_time = ?, end_time = ?, notes = ? WHERE userid = ? AND id = ?");
 		$statement->bind_param("sssssii", $_POST["title"], $_POST["location"], $_POST["start"], $_POST["end"], $_POST["notes"], $userid, $_POST["eventid"]);
