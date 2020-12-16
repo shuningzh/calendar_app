@@ -163,6 +163,7 @@ $(".calendar, #sm-events").on("click", ".events div" , function() {
 		form.find("#dnotes").val(event.data("notes"));
 		form.find("#eventid").val(event.data("id"));
 		$("#display-detail").fadeIn("slow");
+		$("body").css("overflow", "hidden");
 	}
 });
 
@@ -184,6 +185,7 @@ function ajaxMarkReminder(postData, returnFunction) {
 
 $(".circle-add").on("click", function() {
 	$(".form-wrapper").fadeIn("slow");
+	$("body").css("overflow", "hidden");
 	$(".day").removeClass("zoom first-row");
 	$(".day").children().css({
 		marginTop: "auto",
@@ -210,10 +212,12 @@ $(".circle-add").on("click", function() {
 
 $(".form-wrapper .close").on("click", function() {
 	$(".form-wrapper").fadeOut("slow");
+	$("body").css("overflow", "visible");
 });
 
 $("#display-detail .close").on("click", function() {
 	$("#display-detail").fadeOut("slow");
+	$("body").css("overflow", "visible");
 });
 
 $(".wrapper").on("click", function(event) {
@@ -222,10 +226,12 @@ $(".wrapper").on("click", function(event) {
 
 $(".form-wrapper").on("click", function() {
 	$(".form-wrapper").fadeOut("slow");
+	$("body").css("overflow", "visible");
 });
 
 $("#display-detail").on("click", function() {
 	$("#display-detail").fadeOut("slow");
+	$("body").css("overflow", "visible");
 });
 
 $(".form-wrapper .wrapper form").on("submit", function(event) {
@@ -279,9 +285,11 @@ $(".form-wrapper .wrapper form").on("submit", function(event) {
 						let eventid = results.id;
 						displayNewEvent(title, s, e, eventid, location, notes);
 					}
+					$("body").css("overflow", "visible");
 					$(".form-wrapper").fadeOut("slow", function() {
 						$(".form-wrapper .wrapper form")[0].reset();
 					});
+
 				}
 			}
 		});
@@ -330,11 +338,13 @@ $("#display-detail .wrapper form").on("submit", function(event) {
 				$(".e" + $("#eventid").val()).remove();
 				displayNewEvent(title, s, e, $("#eventid").val(), location, notes);
 				$("#display-detail .wrapper form")[0].reset;
+				$("body").css("overflow", "visible");
 				$("#display-detail").fadeOut("slow");
 			} else {
 				if (results == "0") {
 					alert("Nothing changed!");
 					$("#display-detail .wrapper form")[0].reset;
+					$("body").css("overflow", "visible");
 					$("#display-detail").fadeOut("slow");
 				} else {
 					alert("Error!");
@@ -507,11 +517,13 @@ $("#delete-btn").on("click", function() {
 				updateEllipsis("#" + $(this).attr("id"), date);
 			});
 			$("#display-detail .wrapper form")[0].reset;
+			$("body").css("overflow", "visible");
 			$("#display-detail").fadeOut("slow");
 		} else {
 			if (results == "0") {
 				alert("Nothing deleted!");
 				$("#display-detail .wrapper form")[0].reset;
+				$("body").css("overflow", "visible");
 				$("#display-detail").fadeOut("slow");
 			} else {
 				alert("Error!");
