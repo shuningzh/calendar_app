@@ -23,9 +23,19 @@
 	src: url(../fonts/Cinzel-VariableFont_wght.ttf);
 }
 
+@font-face {
+	font-family: ZCOOL;
+	src: url(../fonts/ZCOOLXiaoWei-Regular.ttf);
+}
+
+@font-face {
+	font-family: FangZhengShuSong;
+	src: url(../fonts/FangZhengShuSongJianTi.ttf);
+}
+
 
 body {
-	font-family: Alegreya;
+	font-family: Alegreya, FangZhengShuSong;
 	background-color: #cae9ff;
 }
 

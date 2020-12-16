@@ -21,7 +21,7 @@ body {
 	font-size: 150%;
 	padding-bottom: 3px;
 	border-top: 3px white solid;
-	font-family: JosefinSans;
+	font-family: JosefinSans, ZCOOL;
 }
 
 .calendar .header, .calendar .day {
@@ -35,7 +35,7 @@ body {
 
 .day {
 	height: 95px;
-	font-family: JosefinSans;
+	font-family: JosefinSans, ZCOOL;
 	padding-left: 0;
 	transition: height 1s 0s;
 }
