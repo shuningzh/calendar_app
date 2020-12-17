@@ -172,7 +172,7 @@ $mysqli->close();
 <?php while( $row = $diaries->fetch_assoc() ): ?>
 			<div class="card diary-entry" data-closeclick="true" data-id="<?php echo $row["id"];?>">
 				<div class="card-header d-flex flex-row">
-					<span class="flex-grow-1"><?php echo $row["title"];?></span>
+					<span class="flex-grow-1"><?php echo htmlspecialchars($row["title"]);?></span>
 <?php if( (!isset($_SESSION["logged_in"]) || !$_SESSION["logged_in"]) ): ?>
 					<div class="like-unloggedin d-flex flex-column justify-content-center">
 <?php else: ?>
@@ -199,9 +199,9 @@ $mysqli->close();
 				</div>
 				<div class="card-body">
 					<blockquote class="blockquote mb-0">
-						<p class="shown"><?php echo $row["content"];?></p>
-						<p class="complete"><?php echo $row["content"];?></p>
-						<footer class="blockquote-footer"><?php echo $row["username"];?></footer>
+						<p class="shown"><?php echo htmlspecialchars($row["content"]);?></p>
+						<p class="complete"><?php echo htmlspecialchars($row["content"]);?></p>
+						<footer class="blockquote-footer"><?php echo htmlspecialchars($row["username"]);?></footer>
 					</blockquote>
 				</div>
 			</div>

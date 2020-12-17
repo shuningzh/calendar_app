@@ -8,7 +8,7 @@ document.querySelector("form").onsubmit = function(e) {
 		alert("Please fulfill all requirement first!");
 		return false;
 	} else {
-		let data = "username=" + encodeURIComponent(username.value) + "&name=" + encodeURIComponent(name.value) + "&email=" + email.value + "&password=" + password.value;
+		let data = "username=" + encodeURIComponent(username.value) + "&name=" + encodeURIComponent(name.value) + "&email=" + encodeURIComponent(email.value) + "&password=" + encodeURIComponent(password.value);
 		createUser(data, function(results) {
 			if (results == "created") {
 				return true;

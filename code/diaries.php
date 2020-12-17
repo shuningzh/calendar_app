@@ -134,8 +134,8 @@ else {
 		<div class="card" <?php echo "data-id='" . $row["id"] . "' data-visibility='" . $row["visibility"] . "' data-edit='" . $row["edit_time"] . "'";?>>
 			<img src="images/diary.jpg" class="card-img" alt="diaryImg">
 			<div class="card-img-overlay d-flex flex-column justify-content-center">
-				<h5 class="card-title text-center"><?php echo $row["title"];?></h5>
-				<p class="card-text"><?php echo $row["content"];?></p>
+				<h5 class="card-title text-center"><?php echo htmlspecialchars($row["title"]);?></h5>
+				<p class="card-text"><?php echo htmlspecialchars($row["content"]);?></p>
 				<div class="d-flex flex-row">
 					<small class="card-text text-muted flex-grow-1 ml-1"></small>
 					<small class="card-text text-muted">Created: <?php

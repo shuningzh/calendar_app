@@ -195,9 +195,9 @@ function getReminders(start, end) {
 				let reminderid = results[i].id;
 				let id = "#" + ("0" + (date.getMonth() + 1)).slice(-2) + "-" + ("0" + date.getDate()).slice(-2);
 				if (results[i].finished == "0") {
-					$(id).find(".events").append("<div class='r" + reminderid + "' data-id='" + reminderid + "'><small class='d-flex flex-row justify-content-start'><div class='d-flex flex-column justify-content-center'><i class='far fa-square'></i></div><span class='event-title'>" + title + "</span></small></div>");
+					$(id).find(".events").append("<div class='r" + reminderid + "' data-id='" + reminderid + "'><small class='d-flex flex-row justify-content-start'><div class='d-flex flex-column justify-content-center'><i class='far fa-square'></i></div><span class='event-title'>" + title.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + "</span></small></div>");
 				} else {
-					$(id).find(".events").append("<div class='r" + reminderid + "' data-id='" + reminderid + "'><small class='crossed d-flex flex-row justify-content-start'><div class='d-flex flex-column justify-content-center'><i class='far fa-check-square'></i></div><span class='event-title'>" + title + "</span></small></div>");
+					$(id).find(".events").append("<div class='r" + reminderid + "' data-id='" + reminderid + "'><small class='crossed d-flex flex-row justify-content-start'><div class='d-flex flex-column justify-content-center'><i class='far fa-check-square'></i></div><span class='event-title'>" + title.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + "</span></small></div>");
 				}
 
 				updateEllipsis(id, date);
@@ -292,9 +292,9 @@ function getEvents(start, end) {
 				let sid = "#" + ( "0" +  (sdate.getMonth() + 1) ).slice(-2) + "-" + ( "0" + sdate.getDate() ).slice(-2);
 				let limit = $(sid).height() - $(sid).children().first().height();
 				if (edate.getTime() > now.getTime()) {
-					$(sid).find(".events").append("<div class='" + eventid + "'data-id='" + results[i].id + "' data-start='" + results[i].start_time + "' data-end='" + results[i].end_time + "' data-location='" + results[i].location + "' data-notes='" + results[i].notes + "'><small class='d-flex flex-row justify-content-start'><div class='d-flex flex-column justify-content-center'><i class='far fa-circle'></i></div><span class='event-title'>" + title + "</span><span class='flex-grow-1'></span><span class='time'>" + startTime + "</span></small></div>");
+					$(sid).find(".events").append("<div class='" + eventid + "'data-id='" + results[i].id + "' data-start='" + results[i].start_time + "' data-end='" + results[i].end_time + "' data-location='" + results[i].location + "' data-notes='" + results[i].notes + "'><small class='d-flex flex-row justify-content-start'><div class='d-flex flex-column justify-content-center'><i class='far fa-circle'></i></div><span class='event-title'>" + title.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + "</span><span class='flex-grow-1'></span><span class='time'>" + startTime + "</span></small></div>");
 				} else {
-					$(sid).find(".events").append("<div class='" + eventid + " finished' data-id='" + results[i].id + "' data-start='" + results[i].start_time + "' data-end='" + results[i].end_time + "' data-location='" + results[i].location + "' data-notes='" + results[i].notes + "'><small class='d-flex flex-row justify-content-start'><div class='d-flex flex-column justify-content-center'><i class='fas fa-circle'></i></div><span class='event-title'>" + title + "</span><span class='flex-grow-1'></span><span class='time'>" + startTime + "</span></small></div>");
+					$(sid).find(".events").append("<div class='" + eventid + " finished' data-id='" + results[i].id + "' data-start='" + results[i].start_time + "' data-end='" + results[i].end_time + "' data-location='" + results[i].location + "' data-notes='" + results[i].notes + "'><small class='d-flex flex-row justify-content-start'><div class='d-flex flex-column justify-content-center'><i class='fas fa-circle'></i></div><span class='event-title'>" + title.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + "</span><span class='flex-grow-1'></span><span class='time'>" + startTime + "</span></small></div>");
 				}
 				if ($(window).width() > 767) {
 					updateEllipsis(sid, sdate);
@@ -310,9 +310,9 @@ function getEvents(start, end) {
 						let id = "#" + ( "0" + (temp.getMonth() + 1) ).slice(-2) + "-" + ( "0" + temp.getDate() ).slice(-2);
 						limit = $(id).height() - $(id).children().first().height();
 						if (edate.getTime() > now.getTime()) {
-							$(id).find(".events").append("<div class='" + eventid + "' data-id='" + results[i].id + "' data-start='" + results[i].start_time + "' data-end='" + results[i].end_time + "' data-location='" + results[i].location + "' data-notes='" + results[i].notes + "'><small class='d-flex flex-row justify-content-start'><div class='d-flex flex-column justify-content-center'><i class='far fa-circle'></i></div><span class='event-title'>" + title + "</span><span class='flex-grow-1'></span></small></div>");
+							$(id).find(".events").append("<div class='" + eventid + "' data-id='" + results[i].id + "' data-start='" + results[i].start_time + "' data-end='" + results[i].end_time + "' data-location='" + results[i].location + "' data-notes='" + results[i].notes + "'><small class='d-flex flex-row justify-content-start'><div class='d-flex flex-column justify-content-center'><i class='far fa-circle'></i></div><span class='event-title'>" + title.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + "</span><span class='flex-grow-1'></span></small></div>");
 						} else {
-							$(id).find(".events").append("<div class='" + eventid + " finished' data-id='" + results[i].id + "' data-start='" + results[i].start_time + "' data-end='" + results[i].end_time + "' data-location='" + results[i].location + "' data-notes='" + results[i].notes + "'><small class='d-flex flex-row justify-content-start'><div class='d-flex flex-column justify-content-center'><i class='fas fa-circle'></i></div><span class='event-title'>" + title + "</span><span class='flex-grow-1'></span></small></div>");
+							$(id).find(".events").append("<div class='" + eventid + " finished' data-id='" + results[i].id + "' data-start='" + results[i].start_time + "' data-end='" + results[i].end_time + "' data-location='" + results[i].location + "' data-notes='" + results[i].notes + "'><small class='d-flex flex-row justify-content-start'><div class='d-flex flex-column justify-content-center'><i class='fas fa-circle'></i></div><span class='event-title'>" + title.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + "</span><span class='flex-grow-1'></span></small></div>");
 						}
 						updateEllipsis(id, temp);
 						temp.setDate(temp.getDate() + 1);

@@ -60,8 +60,8 @@ $(".wrapper form").on("submit", function(event) {
 				$("#username + .error").css("display", "none");
 				if ( results == "updated" ) {
 					$(".wrapper input, .wrapper select").prop("disabled", true);
-					$(".header h1").html(name);
-					$(".header h5").html("Username: " + username);
+					$(".header h1").text(name);
+					$(".header h5").text("Username: " + username);
 					$("#update-button").fadeOut("slow", function() {
 						$("#edit-div").fadeIn();
 					});

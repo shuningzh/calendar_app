@@ -363,7 +363,7 @@ $(".add form").on("submit", function(event) {
 					let smaller = null;
 					$(".card").each(function(){
 						if ($(this).find(".date").html() == date) {
-							$(this).find("ul").append("<li class='list-group-item list-group-item-action d-flex flex-row justify-content-start' data-id='" + results.id + "' data-notes=''><div class='d-flex flex-column justify-content-center button check'><i class='far fa-square'></i></div><div class='item'><span>"+ item +"</span></div><div class='flex-grow-1'></div><div class='d-flex flex-column justify-content-center button edit'><i class='fas fa-edit'></i></div><div class='d-flex flex-column justify-content-center button trash'><i class='far fa-trash-alt'></i></div></li>");
+							$(this).find("ul").append("<li class='list-group-item list-group-item-action d-flex flex-row justify-content-start' data-id='" + results.id + "' data-notes=''><div class='d-flex flex-column justify-content-center button check'><i class='far fa-square'></i></div><div class='item'><span>"+ item.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') +"</span></div><div class='flex-grow-1'></div><div class='d-flex flex-column justify-content-center button edit'><i class='fas fa-edit'></i></div><div class='d-flex flex-column justify-content-center button trash'><i class='far fa-trash-alt'></i></div></li>");
 							$("#content").val("");
 							$("#deadline").val("");
 							found = true;
@@ -379,7 +379,7 @@ $(".add form").on("submit", function(event) {
 						let parent = $("#all");
 						let headerid = "head" + number;
 						let collapseid = "collapse" + number;
-						let newElement = "<div class='card'><div class='card-header' id="+ headerid +"><h2 class='mb-0'><button class='btn btn-link btn-block text-left shadow-none d-flex flex-row' type='button' data-toggle='collapse' data-target='#"+ collapseid + "' aria-expanded='true' aria-controls='" + collapseid + "'><div class='flex-grow-1 date'>" + date + "</div><div class='d-flex flex-column justify-content-center'><i class='far fa-caret-square-up'></i></div></button></h2></div><div id='" + collapseid + "' class='collapse multi-collapse show' aria-labelledby='" + headerid + "'><div class='card-body'><ul class='list-group text-wrap reminders'><li class='list-group-item list-group-item-action d-flex flex-row justify-content-start' data-id='" + results.id + "' data-notes=''><div class='d-flex flex-column justify-content-center button check'><i class='far fa-square'></i></div><div class='item'><span>" + item +"</span></div><div class='flex-grow-1'></div><div class='d-flex flex-column justify-content-center button edit'><i class='fas fa-edit'></i></div><div class='d-flex flex-column justify-content-center button trash'><i class='far fa-trash-alt'></i></div></li></ul></div></div></div>";
+						let newElement = "<div class='card'><div class='card-header' id="+ headerid +"><h2 class='mb-0'><button class='btn btn-link btn-block text-left shadow-none d-flex flex-row' type='button' data-toggle='collapse' data-target='#"+ collapseid + "' aria-expanded='true' aria-controls='" + collapseid + "'><div class='flex-grow-1 date'>" + date + "</div><div class='d-flex flex-column justify-content-center'><i class='far fa-caret-square-up'></i></div></button></h2></div><div id='" + collapseid + "' class='collapse multi-collapse show' aria-labelledby='" + headerid + "'><div class='card-body'><ul class='list-group text-wrap reminders'><li class='list-group-item list-group-item-action d-flex flex-row justify-content-start' data-id='" + results.id + "' data-notes=''><div class='d-flex flex-column justify-content-center button check'><i class='far fa-square'></i></div><div class='item'><span>" + item.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') +"</span></div><div class='flex-grow-1'></div><div class='d-flex flex-column justify-content-center button edit'><i class='fas fa-edit'></i></div><div class='d-flex flex-column justify-content-center button trash'><i class='far fa-trash-alt'></i></div></li></ul></div></div></div>";
 						if (smaller != null) {
 							smaller.after(newElement);
 						} else {
@@ -409,7 +409,7 @@ $(".add form").on("submit", function(event) {
 					let found = false;
 					$(".card").each(function(){
 						if ($(this).find(".date").html() == "Undated") {
-							$(this).find("ul").append("<li class='list-group-item list-group-item-action d-flex flex-row justify-content-start' data-id='" + results.id + "' data-notes=''><div class='d-flex flex-column justify-content-center button check'><i class='far fa-square'></i></div><div class='item'><span>"+ item +"</span></div><div class='flex-grow-1'></div><div class='d-flex flex-column justify-content-center button edit'><i class='fas fa-edit'></i></div><div class='d-flex flex-column justify-content-center button trash'><i class='far fa-trash-alt'></i></div></li>");
+							$(this).find("ul").append("<li class='list-group-item list-group-item-action d-flex flex-row justify-content-start' data-id='" + results.id + "' data-notes=''><div class='d-flex flex-column justify-content-center button check'><i class='far fa-square'></i></div><div class='item'><span>"+ item.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') +"</span></div><div class='flex-grow-1'></div><div class='d-flex flex-column justify-content-center button edit'><i class='fas fa-edit'></i></div><div class='d-flex flex-column justify-content-center button trash'><i class='far fa-trash-alt'></i></div></li>");
 							$("#content").val("");
 							$("#deadline").val("");
 							found = true;
@@ -420,7 +420,7 @@ $(".add form").on("submit", function(event) {
 						let parent = $("#all");
 						let headerid = "head" + number;
 						let collapseid = "collapse" + number;
-						let newElement = "<div class='card'><div class='card-header' id="+ headerid +"><h2 class='mb-0'><button class='btn btn-link btn-block text-left shadow-none d-flex flex-row' type='button' data-toggle='collapse' data-target='#"+ collapseid + "' aria-expanded='true' aria-controls='" + collapseid + "'><div class='flex-grow-1 date'>Undated</div><div class='d-flex flex-column justify-content-center'><i class='far fa-caret-square-up'></i></div></button></h2></div><div id='" + collapseid + "' class='collapse multi-collapse show' aria-labelledby='" + headerid + "'><div class='card-body'><ul class='list-group text-wrap reminders'><li class='list-group-item list-group-item-action d-flex flex-row justify-content-start' data-id='" + results.id + "' data-notes=''><div class='d-flex flex-column justify-content-center button check'><i class='far fa-square'></i></div><div class='item'><span>" + item +"</span></div><div class='flex-grow-1'></div><div class='d-flex flex-column justify-content-center button edit'><i class='fas fa-edit'></i></div><div class='d-flex flex-column justify-content-center button trash'><i class='far fa-trash-alt'></i></div></li></ul></div></div></div>";
+						let newElement = "<div class='card'><div class='card-header' id="+ headerid +"><h2 class='mb-0'><button class='btn btn-link btn-block text-left shadow-none d-flex flex-row' type='button' data-toggle='collapse' data-target='#"+ collapseid + "' aria-expanded='true' aria-controls='" + collapseid + "'><div class='flex-grow-1 date'>Undated</div><div class='d-flex flex-column justify-content-center'><i class='far fa-caret-square-up'></i></div></button></h2></div><div id='" + collapseid + "' class='collapse multi-collapse show' aria-labelledby='" + headerid + "'><div class='card-body'><ul class='list-group text-wrap reminders'><li class='list-group-item list-group-item-action d-flex flex-row justify-content-start' data-id='" + results.id + "' data-notes=''><div class='d-flex flex-column justify-content-center button check'><i class='far fa-square'></i></div><div class='item'><span>" + item.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') +"</span></div><div class='flex-grow-1'></div><div class='d-flex flex-column justify-content-center button edit'><i class='fas fa-edit'></i></div><div class='d-flex flex-column justify-content-center button trash'><i class='far fa-trash-alt'></i></div></li></ul></div></div></div>";
 						parent.append(newElement);
 						number++;
 						$("#content").val("");
@@ -473,7 +473,7 @@ $(".edit-form form").on("submit", function(event) {
 				let prevDateTitle = onEdit.parent().parent().parent().parent().find(".date").html();
 				let oldUl = onEdit.parent();
 				let card = onEdit.parent().parent().parent().parent();
-				onEdit.find("span").html(title);
+				onEdit.find("span").text(title);
 				if (dateTitle != prevDateTitle) {
 					let found = false;
 					let smaller = null;
@@ -543,7 +543,7 @@ $(".close").on("click", function(event) {
 $("#all").on("click", ".card-body ul li .edit",  function(event) {
 	$(".form-wrapper").fadeIn("slow");
 	onEdit = $(this).parent();
-	let title = onEdit.find("span").html();
+	let title = onEdit.find("span").text();
 	let date = onEdit.parent().parent().parent().parent().find(".date").html();
 	dateStr = "";
 	if (date != "Undated") {

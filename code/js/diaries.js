@@ -78,7 +78,7 @@ $(".diary-form form").on("submit", function(event) {
 					mo = new Intl.DateTimeFormat('en', { month: 'long' }).format(d);
 					da = new Intl.DateTimeFormat('en', { day: 'numeric' }).format(d);
 					let display = `${mo} ${da}, ${ye}`;
-					let newDiary = "<div class='card' data-id='" + results.id + "' data-visibility='" + vis + "' data-edit='" + created + "'><img src='images/diary.jpg' class='card-img' alt='diaryImg'><div class='card-img-overlay d-flex flex-column justify-content-center'><h5 class='card-title text-center'>" + title + "</h5><p class='card-text'>" + content + "</p><div class='d-flex flex-row'><small class='card-text text-muted flex-grow-1'>Last updated: 0 seconds ago</small><small class='card-text text-muted'>Created: " + display + "</small></div><div class='d-flex flex-row button-group align-bottom'><a href='#' type='button' class='card-link btn btn-outline-info'>View Detail</a><a href='#' type='button' class='card-link btn btn-outline-danger'>Delete</a></div></div></div>";
+					let newDiary = "<div class='card' data-id='" + results.id + "' data-visibility='" + vis + "' data-edit='" + created + "'><img src='images/diary.jpg' class='card-img' alt='diaryImg'><div class='card-img-overlay d-flex flex-column justify-content-center'><h5 class='card-title text-center'>" + title.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + "</h5><p class='card-text'>" + content.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + "</p><div class='d-flex flex-row'><small class='card-text text-muted flex-grow-1'>Last updated: 0 seconds ago</small><small class='card-text text-muted'>Created: " + display + "</small></div><div class='d-flex flex-row button-group align-bottom'><a href='#' type='button' class='card-link btn btn-outline-info'>View Detail</a><a href='#' type='button' class='card-link btn btn-outline-danger'>Delete</a></div></div></div>";
 					$(".wrapper").prepend(newDiary);
 					$(".card").css("display", "flex");
 					$(".dsearch input").val("");
@@ -111,8 +111,8 @@ let onEdit = null;
 $(".wrapper").on("click", ".card .btn-outline-info", function(event) {
 	$("body").css("overflow", "hidden");
 	onEdit = $(this).parent().parent().parent();
-	$("#view-title").html(onEdit.find(".card-title").html());
-	$("#view-content").html(onEdit.find(".card-title + .card-text").html());
+	$("#view-title").text(onEdit.find(".card-title").text());
+	$("#view-content").text(onEdit.find(".card-title + .card-text").text());
 	if (onEdit.data("visibility") == "0") {
 		$("#view-visibility").html("Public");
 	} else if (onEdit.data("visibility") == "1") {
@@ -158,9 +158,9 @@ $(".cancel-btn").on("click", function(event) {
 });
 
 $("#edit-btn").on("click", function(event) {
-	$("#detail-title").val($("#view-title").html());
+	$("#detail-title").val($("#view-title").text());
 	$("input[name=visibility2][value=" + onEdit.data("visibility") + "]").prop("checked", "checked");
-	$("#detail-content").val($("#view-content").html());
+	$("#detail-content").val($("#view-content").text());
 	$("#view-edit").fadeOut("slow", function() {
 		$("#edit-detail").fadeIn("slow");
 	});
@@ -191,8 +191,8 @@ $("#edit-detail").on("submit", function(event) {
 		let data = "order=update&title=" + encodeURIComponent(title) + "&content=" + encodeURIComponent(content) + "&visibility=" + vis + "&id=" + onEdit.data("id") + "&edit=" + time + "&user=" + current_user_id;
 		ajaxDiaries(data, function(results) {
 			if (results == "true") {
-				onEdit.find(".card-title").html(title);
-				onEdit.find(".card-title + .card-text").html(content);
+				onEdit.find(".card-title").text(title);
+				onEdit.find(".card-title + .card-text").text(content);
 				onEdit.data("visibility", vis);
 				onEdit.data("edit", time);
 				onEdit.find("small").first().html("Last updated: 0 seconds ago");

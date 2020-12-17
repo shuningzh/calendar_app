@@ -156,7 +156,7 @@ $(".calendar, #sm-events").on("click", ".events div" , function() {
 	} else if (!$(this).hasClass("more")) {
 		let event = $(this);
 		let form = $("#display-detail form");
-		form.find("#dtitle").val(event.find(".event-title").html());
+		form.find("#dtitle").val(event.find(".event-title").text());
 		form.find("#dlocation").val(event.data("location"));
 		form.find("#dstart").val(event.data("start").replace(/\s/g, 'T'));
 		form.find("#dend").val(event.data("end").replace(/\s/g, 'T'));
@@ -376,7 +376,7 @@ function displayNewEvent(title, start, end, id, location, notes) {
 	let endStr = `${ye}-${mo}-${da} ` + hr + ":" + mi + ":00";
 
 	let limit = $(sid).height() - $(sid).children().first().height();
-	let newElement = "<div class='" + eventid + "' data-id='" + id + "' data-location='" + location + "' data-notes='" + notes + "' data-start='" + startStr + "' data-end='" + endStr + "'><small class='d-flex flex-row justify-content-start'><div class='d-flex flex-column justify-content-center'><i class='far fa-circle'></i></div><span class='event-title'>" + title + "</span><span class='flex-grow-1'></span><span class='time'>" + startTime + "</span></small></div>";
+	let newElement = "<div class='" + eventid + "' data-id='" + id + "' data-location='" + location + "' data-notes='" + notes + "' data-start='" + startStr + "' data-end='" + endStr + "'><small class='d-flex flex-row justify-content-start'><div class='d-flex flex-column justify-content-center'><i class='far fa-circle'></i></div><span class='event-title'>" + title.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + "</span><span class='flex-grow-1'></span><span class='time'>" + startTime + "</span></small></div>";
 	let position = null;
 	if (end.getTime() > now.getTime()) {
 		let events = $(sid).find(".events").children();
@@ -391,7 +391,7 @@ function displayNewEvent(title, start, end, id, location, notes) {
 		});
 
 	} else {
-		newElement = "<div class='" + eventid + " finished' data-id='" + id + "' data-location='" + location + "' data-notes='" + notes + "' data-start='" + startStr + "' data-end='" + endStr + "'><small class='d-flex flex-row justify-content-start'><div class='d-flex flex-column justify-content-center'><i class='fas fa-circle'></i></div><span class='event-title'>" + title + "</span><span class='flex-grow-1'></span><span class='time'>" + startTime + "</span></small></div>";
+		newElement = "<div class='" + eventid + " finished' data-id='" + id + "' data-location='" + location + "' data-notes='" + notes + "' data-start='" + startStr + "' data-end='" + endStr + "'><small class='d-flex flex-row justify-content-start'><div class='d-flex flex-column justify-content-center'><i class='fas fa-circle'></i></div><span class='event-title'>" + title.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + "</span><span class='flex-grow-1'></span><span class='time'>" + startTime + "</span></small></div>";
 		let events = $(sid).find(".events").children();
 		if ($(sid).hasClass("small-onclick")) {
 			events = $(".content-container").find(".events").children();
@@ -428,7 +428,7 @@ function displayNewEvent(title, start, end, id, location, notes) {
 		while ( temp.getTime() <= end.getTime() ) {
 			let dayid = "#" + ("0" + (temp.getMonth() + 1)).slice(-2) + "-" + ("0" + temp.getDate()).slice(-2);
 			limit = $(dayid).height() - $(dayid).children().first().height();
-			let div = "<div class='" + eventid + "'  data-id='" + id + "' data-location='" + location + "' data-notes='" + notes + "' data-start='" + startStr + "' data-end='" + endStr + "'><small class='d-flex flex-row justify-content-start'><div class='d-flex flex-column justify-content-center'><i class='far fa-circle'></i></div><span class='event-title'>" + title + "</span><span class='flex-grow-1'></span></small></div>";
+			let div = "<div class='" + eventid + "'  data-id='" + id + "' data-location='" + location + "' data-notes='" + notes + "' data-start='" + startStr + "' data-end='" + endStr + "'><small class='d-flex flex-row justify-content-start'><div class='d-flex flex-column justify-content-center'><i class='far fa-circle'></i></div><span class='event-title'>" + title.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + "</span><span class='flex-grow-1'></span></small></div>";
 			let newPosition = null;
 			if (end.getTime() > now.getTime()) {
 				let events = $(dayid).find(".events").children();
@@ -442,7 +442,7 @@ function displayNewEvent(title, start, end, id, location, notes) {
 					}
 				});
 			} else {
-				div = "<div class='" + eventid + " finished'  data-id='" + id + "' data-location='" + location + "' data-notes='" + notes + "' data-start='" + startStr + "' data-end='" + endStr + "'><small class='d-flex flex-row justify-content-start'><div class='d-flex flex-column justify-content-center'><i class='fas fa-circle'></i></div><span class='event-title'>" + title + "</span><span class='flex-grow-1'></span></small></div>";
+				div = "<div class='" + eventid + " finished'  data-id='" + id + "' data-location='" + location + "' data-notes='" + notes + "' data-start='" + startStr + "' data-end='" + endStr + "'><small class='d-flex flex-row justify-content-start'><div class='d-flex flex-column justify-content-center'><i class='fas fa-circle'></i></div><span class='event-title'>" + title.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + "</span><span class='flex-grow-1'></span></small></div>";
 				let events = $(dayid).find(".events").children();
 				if ($(dayid).hasClass("small-onclick")) {
 					events = $(".content-container").find(".events").children();
