@@ -1,4 +1,6 @@
 document.querySelector("form").onsubmit = function(e) {
+	e.preventDefault();
+	let form = this;
 	let username = document.querySelector("#username");
 	let name = document.querySelector("#name");
 	let email = document.querySelector("#email");
@@ -6,15 +8,14 @@ document.querySelector("form").onsubmit = function(e) {
 	let confirmPassword = document.querySelector("#confirmPassword");
 	if ( !username.classList.contains("is-valid") || !name.classList.contains("is-valid") || !email.classList.contains("is-valid") || !password.classList.contains("is-valid") || !confirmPassword.classList.contains("is-valid") ) {
 		alert("Please fulfill all requirement first!");
-		return false;
 	} else {
 		let data = "username=" + encodeURIComponent(username.value) + "&name=" + encodeURIComponent(name.value) + "&email=" + encodeURIComponent(email.value) + "&password=" + encodeURIComponent(password.value);
 		createUser(data, function(results) {
 			if (results == "created") {
-				return true;
+				form.submit();
 			} else {
-				console.log("User insertion error");
-				return false;
+				alert("User creation error");
+				console.log("User creation error");
 			}
 		});
 	}
