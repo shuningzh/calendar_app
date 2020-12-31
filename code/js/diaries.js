@@ -2,32 +2,35 @@ $(window).on("load", function(event) {
 	let date = new Date();
 	$(".card").each(function(index, el) {
 		let edit = new Date($(this).data("edit").replace(/\s/, 'T'));
-		let diff = date.getFullYear() - edit.getFullYear();
-		if (diff == 0) {
-			diff = date.getMonth() - edit.getMonth();
-			if (diff == 0) {
-				diff = date.getDate() - edit.getDate();
-				if (diff == 0) {
-					diff = date.getHours() - edit.getHours();
-					if (diff == 0) {
-						diff = date.getMinutes() - edit.getMinutes();
-						if (diff == 0) {
-							diff = date.getSeconds() - edit.getSeconds() + " seconds ago";
-						}  else {
-							diff += " minutes ago";
+		// diff in seconds
+		let diff = Math.floor( (date.getTime() - edit.getTime()) / 1000 );
+		if ( (diff / 60) >= 1 ) {
+			diff = Math.floor(diff / 60);  // in min
+			if ( (diff / 60) >= 1 ) {
+				diff = Math.floor(diff / 60);  // in hours
+				if ( (diff / 24) >= 1 ) {
+					diff = Math.floor(diff / 24);  // in days
+					if ( (diff / 30.436875) >= 1 ) {
+						diff = Math.floor(diff / 30.436875); // in months
+						if ( (diff / 12) >= 1 ) {
+							diff = Math.floor(diff / 12);  // in years
+							diff += " years ago";
+						} else {
+							diff += " months ago";
 						}
 					} else {
-						diff += " hours ago";
+						diff += " days ago";
 					}
 				} else {
-					diff += " days ago";
+					diff += " hours ago";
 				}
 			} else {
-				diff += " months ago";
+				diff += " minutes ago";
 			}
 		} else {
-			diff += " years ago";
+			diff += " seconds ago";
 		}
+		
 		$(this).find("small").first().html("Last updated: " + diff);
 	});
 });
