@@ -129,6 +129,7 @@ $(".wrapper").on("click", ".card .btn-outline-info", function(event) {
 		$("#diary-detail").animate({height:'toggle'}, 900);
 	}
 });
+
 $(".wrapper").on("click", ".card .btn-outline-danger", function(event) {
 	let card = $(this).parent().parent().parent();
 	let data = "order=delete&id=" + card.data("id") + "&user=" + current_user_id;
@@ -164,6 +165,8 @@ $("#edit-btn").on("click", function(event) {
 	$("#detail-title").val($("#view-title").text());
 	$("input[name=visibility2][value=" + onEdit.data("visibility") + "]").prop("checked", "checked");
 	$("#detail-content").val($("#view-content").text());
+	$("#remain-char").text(4000 - $("#view-content").text().length);
+	$("#char-num").text($("#view-content").text().length);
 	$("#view-edit").fadeOut("slow", function() {
 		$("#edit-detail").fadeIn("slow");
 	});
@@ -182,6 +185,8 @@ $("#edit-detail").on("submit", function(event) {
 			if ( !confirm("Are you sure to submit an empty diary?") ) {
 				return;
 			}
+		} else if (content.length > 4000) {
+			return;
 		}
 		let date = new Date();
 		let ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(date);
@@ -256,3 +261,23 @@ function ajaxDiaries(postData, returnFunction) {
 	}
 	xhr.send(postData);
 }
+
+$("#detail-content").on("input", function() {
+	$("#char-num").text($("#detail-content").val().length);
+	let len = 4000 - $("#detail-content").val().length;
+	let smallElem = $(this).next().children().first();
+	if (len >= 0 ) {
+		$("#remain-char").text(len);
+		smallElem.addClass("text-muted");
+		$("#char-num").addClass("text-muted");
+		smallElem.removeClass("text-danger");
+		$("#char-num").removeClass("text-danger");
+	} else {
+		$("#remain-char").text(0);
+		smallElem.addClass("text-danger");
+		$("#char-num").addClass("text-danger");
+		smallElem.removeClass("text-muted");
+		$("#char-num").removeClass("text-muted");
+	}
+	
+});

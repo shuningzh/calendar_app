@@ -238,6 +238,10 @@ else {
 					</div>
 				</div>
 				<textarea class="form-control" id="detail-content" placeholder="Write Something..."></textarea>
+				<div class="d-flex flex-row justify-content-between">
+					<small class="mt-1 font-italic text-muted"> Maximum 4000 characters (<span id="remain-char"></span> remaining)</small>
+					<small id="char-num" class="text-muted"></small>
+				</div>
 				<div class="d-flex flex-row flex-nowrap detail-buttons">
 					<button id="submit-edit" type="submit" class="btn btn-warning btn-lg flex-grow-1">Save</button>
 					<button type="button" class="btn btn-secondary btn-lg cancel-btn">Cancel</button>
