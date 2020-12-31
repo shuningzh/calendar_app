@@ -224,7 +224,11 @@ else {
 				<div class="form-group">
 					<label for="title" class="sr-only">Title</label>
 					<input type="text" class="form-control" id="title" placeholder="To Do..." readonly="true">
-					<small class="error">Empty Title!</small>
+					<div class="d-flex flex-row justify-content-between">
+						<small class="error">Empty Title!</small>
+						<div class="flex-grow-1"></div>
+						<small class="text-muted"><span></span>/100</small>
+					</div>
 				</div>
 				<div class="form-group">
 					<label for="start" class="sr-only">Deadline</label>
@@ -234,6 +238,7 @@ else {
 				<div class="form-group">
 					<label for="notes" class="sr-only">Notes</label>
 					<textarea class="form-control" id="notes" rows="3" placeholder="Notes..." readonly="true"></textarea>
+					<small class="d-block text-right text-muted"><span></span>/1000</small>
 				</div>
 				<div class="d-flex flex-row">
 					<button class="btn btn-warning" type="button" id="edit-btn">Edit</button>

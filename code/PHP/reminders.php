@@ -21,7 +21,7 @@
 		if(!$executed) {
 			echo $mysqli->error;
 		}
-		if($statement->affected_rows == 1) {
+		if($statement->affected_rows <= 1) {
 			echo "true";
 		}
 		

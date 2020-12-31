@@ -339,12 +339,25 @@ function isJson(json) {
 	return true;
 }
 
+$("#content").on("input", function() {
+	let len = $(this).val().length;
+	if (len > 100) {
+		$(this).addClass("text-danger");
+	} else {
+		$(this).removeClass("text-danger");
+	}
+
+});
+
 
 $(".add form").on("submit", function(event) {
 	event.preventDefault();
 	let item = $("#content").val().trim();
 	if (item.length == 0) {
 		alert("Empty Entry!");
+		return false;
+	} else if (item.length > 100) {
+		alert("Max length: " + item.length + "/100");
 		return false;
 	}
 	let deadline = $("#deadline").val()+"T00:00:00";
@@ -443,11 +456,16 @@ $(".edit-form form").on("submit", function(event) {
 	let title = $.trim($("#title").val());
 	$("#title").val(title);
 	if (title.length == 0) {
-		$("#title + .error").css("display", "block");
+		$("#title").next().children().first().css("display", "block");
+	} else if (title.length > 100) {
+		return;
 	} else {
-		$("#title + .error").css("display", "none");
+		$("#title").next().children().first().css("display", "none");
 	}
 	let notes = $("#notes").val();
+	if (notes.length > 1000) {
+		return;
+	}
 	let id = onEdit.data("id");
 	onEdit.data("notes", notes);
 	let date = $("#date").val() + "T00:00:00";
@@ -458,7 +476,7 @@ $(".edit-form form").on("submit", function(event) {
 		$("#date + .error").css("display", "none");
 	}
 
-	if ( $("#title + .error").css("display") == "none" && $("#date + .error").css("display") == "none" ) {
+	if ( $("#title").next().children().first().css("display") == "none" && $("#date + .error").css("display") == "none" ) {
 
 		let data = "id=" + id + "&title=" + encodeURIComponent(title) + "&deadline=" + $("#date").val() + "&notes=" + encodeURIComponent(notes) + "&user=" + current_user_id;
 		ajaxUpdate(data, function(results) {
@@ -520,10 +538,6 @@ $(".edit-form form").on("submit", function(event) {
 				alert("error");
 			}
 		});
-
-
-
-
 	}
 	
 });
@@ -541,7 +555,6 @@ $(".close").on("click", function(event) {
 });
 
 $("#all").on("click", ".card-body ul li .edit",  function(event) {
-	$(".form-wrapper").fadeIn("slow");
 	onEdit = $(this).parent();
 	let title = onEdit.find("span").text();
 	let date = onEdit.parent().parent().parent().parent().find(".date").html();
@@ -555,8 +568,16 @@ $("#all").on("click", ".card-body ul li .edit",  function(event) {
 	}
 	let notes = onEdit.data("notes");
 	$("#title").val(title);
+	$("#title").next().children().last().addClass("text-muted");
+	$("#title").next().children().last().removeClass("text-danger");
+	$("#title").next().children().last().children().text(title.length);
 	$("#date").val(dateStr);
 	$("#notes").val(notes);
+	$("#notes").next().addClass("text-muted");
+	$("#notes").next().removeClass("text-danger");
+	$("#notes").next().children().text(notes.length);
+
+	$(".form-wrapper").fadeIn("slow");
 
 });
 
@@ -565,6 +586,30 @@ $("#edit-btn").on("click", function(event) {
 		$(".edit-form form input, .edit-form form textarea").prop("readonly", false);
 		$("#save-btn").fadeIn();
 	});
+});
+
+$("#title").on("input", function() {
+	let len = $(this).val().length;
+	$(this).next().children().last().children().text(len);
+	if (len > 100) {
+		$(this).next().children().last().addClass("text-danger");
+		$(this).next().children().last().removeClass("text-muted");
+	} else {
+		$(this).next().children().last().addClass("text-muted");
+		$(this).next().children().last().removeClass("text-danger");
+	}
+});
+
+$("#notes").on("input", function() {
+	let len = $(this).val().length;
+	$(this).next().children().text(len);
+	if (len > 1000) {
+		$(this).next().addClass("text-danger");
+		$(this).next().removeClass("text-muted");
+	} else {
+		$(this).next().addClass("text-muted");
+		$(this).next().removeClass("text-danger");
+	}
 });
 
 $("#delete-btn").on("click", function(event) {
