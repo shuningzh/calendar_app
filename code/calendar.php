@@ -197,6 +197,10 @@ else {
 				<div class="form-group">
 					<label for="notes" class="sr-only">Notes</label>
 					<textarea class="form-control" id="notes" rows="3" placeholder="Notes..."></textarea>
+					<div class="d-flex flex-row justify-content-between">
+						<small class="font-italic text-muted"> Maximum 1000 characters (<span id="notes-remain-char"></span> remaining)</small>
+						<small id="notes-char-num" class="text-muted"></small>
+					</div>
 				</div>
 				<button class="btn btn-info btn-lg btn-block" type="submit">Add</button>
 			</form>
@@ -235,6 +239,10 @@ else {
 				<div class="form-group">
 					<label for="dnotes" class="sr-only">Notes</label>
 					<textarea class="form-control" id="dnotes" rows="3" placeholder="Notes..."></textarea>
+					<div class="d-flex flex-row justify-content-between">
+						<small class="font-italic text-muted"> Maximum 1000 characters (<span id="dnotes-remain-char"></span> remaining)</small>
+						<small id="dnotes-char-num" class="text-muted"></small>
+					</div>
 				</div>
 				<input type="hidden" id="eventid" name="eventid" value="">
 
