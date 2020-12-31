@@ -124,6 +124,7 @@
 #view-edit, #edit-detail {
 	height: 100%;
 	word-wrap: break-word;
+	position: relative;
 }
 
 #edit-detail {
@@ -157,6 +158,13 @@
 
 #view-content {
 	overflow-y: scroll;
+}
+
+.detail-buttons {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
 }
 
 @media(max-width: 991px) {

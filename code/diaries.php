@@ -32,10 +32,6 @@ else {
 	}
 
 	$mysqli->close();
-
-
-
-
 }
 
 
@@ -212,8 +208,8 @@ else {
 			<div id="view-edit">
 				<h1 id="view-title"></h1>
 				<small id="view-visibility"></small>
-				<div id="view-content"></div>
-				<div class="d-flex flex-row flex-nowrap">
+				<div id="view-content" class="mt-3"></div>
+				<div class="d-flex flex-row flex-nowrap detail-buttons">
 					<button type="button" class="btn btn-warning btn-lg flex-grow-1" id="edit-btn" style="margin-right: 2%;">Edit</button>
 					<button type="button" class="btn btn-secondary btn-lg cancel-btn" style="margin-right: 2%;">Cancel</button>
 				</div>
@@ -242,7 +238,7 @@ else {
 					</div>
 				</div>
 				<textarea class="form-control" id="detail-content" placeholder="Write Something..."></textarea>
-				<div class="d-flex flex-row flex-nowrap">
+				<div class="d-flex flex-row flex-nowrap detail-buttons">
 					<button id="submit-edit" type="submit" class="btn btn-warning btn-lg flex-grow-1">Save</button>
 					<button type="button" class="btn btn-secondary btn-lg cancel-btn">Cancel</button>
 				</div>
