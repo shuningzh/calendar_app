@@ -68,16 +68,16 @@ if( !isset($_SESSION["logged_in"]) || !$_SESSION["logged_in"] ) {
 			<div class="form-group form-row">
 				<div class="col-12 col-md-6">
 					<label for="username">Username</label>
-					<input type="text" class="form-control" placeholder="Username" id="username" name="username">
+					<input type="text" class="form-control" maxlength="45" placeholder="Username" id="username" name="username">
 				</div>
 				<div class="col-12 col-md-6">
 					<label for="name">Preferred Name</label>
-					<input type="text" class="form-control" placeholder="Preferred Name" id="name" name="name">
+					<input type="text" class="form-control" maxlength="45" placeholder="Preferred Name" id="name" name="name">
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="email">Email</label>
-				<input type="email" class="form-control" placeholder="Email" id="email" name="email">
+				<input type="email" class="form-control" maxlength="45" placeholder="Email" id="email" name="email">
 			</div>
 			<div class="form-group">
 				<label for="password">Password</label>

@@ -127,26 +127,26 @@ else {
 				<path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
 				<path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
 			</svg>
-			<h1><?php echo htmlspecialchars($user["name"]);?></h1>
-			<h5>Username: <?php echo htmlspecialchars($user["username"]);?></h5>
+			<h1 class="text-break"><?php echo htmlspecialchars($user["name"]);?></h1>
+			<h5 class="text-break">Username: <?php echo htmlspecialchars($user["username"]);?></h5>
 		</div>
 		<hr>
 		<form method="POST">
 			<div class="form-group form-row">
 				<div class="col-12 col-md-6">
 					<label for="username">Username</label>
-					<input type="text" class="form-control" disabled="true" value="<?php echo $user["username"];?>" id="username" name="username">
+					<input type="text" class="form-control text-truncate" maxlength="45" disabled="true" value="<?php echo $user["username"];?>" id="username" name="username">
 					<small class="error"></small>
 				</div>
 				<div class="col-12 col-md-6">
 					<label for="name">Preferred Name</label>
-					<input type="text" disabled="true" class="form-control" value="<?php echo $user["name"];?>" id="name" name="name">
+					<input type="text" disabled="true" class="form-control text-truncate" maxlength="45" value="<?php echo $user["name"];?>" id="name" name="name">
 					<small class="error">Empty Name!</small>
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="email">Email</label>
-				<input type="email" class="form-control" disabled="true" value="<?php echo $user["email"];?>" id="email" name="email">
+				<input type="email" class="form-control text-truncate" maxlength="45" disabled="true" value="<?php echo $user["email"];?>" id="email" name="email">
 				<small class="error">Invalid Email!</small>
 			</div>
 			<div class="form-group form-row">
