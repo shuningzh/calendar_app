@@ -172,6 +172,10 @@ else {
 				<div class="form-group">
 					<label for="title" class="sr-only">Title</label>
 					<input type="text" class="form-control" id="title" placeholder="Title">
+					<div class="d-flex flex-row justify-content-between">
+						<small class="mt-1 font-italic text-muted"> Maximum 100 characters (<span id="title-remain">100</span> remaining)</small>
+						<small id="title-char" class="text-muted">0</small>
+					</div>
 					<small class="error">Empty Title!</small>
 				</div>
 				<div class="form-group row">
@@ -198,6 +202,10 @@ else {
 				<div class="form-group">
 					<label for="content" class="sr-only">Content</label>
 					<textarea class="form-control" name="content" id="content" rows="9" placeholder="Write Something..."></textarea>
+					<div class="d-flex flex-row justify-content-between">
+						<small class="mt-1 font-italic text-muted"> Maximum 4000 characters (<span id="content-remain">4000</span> remaining)</small>
+						<small id="content-char" class="text-muted">0</small>
+					</div>
 				</div>
 				<button class="btn btn-info btn-lg btn-block" type="submit">Submit</button>
 			</form>
@@ -216,6 +224,11 @@ else {
 			</div>
 			<form id="edit-detail">
 				<input class="form-control" type="text" name="detail-title" id="detail-title" placeholder="Title">
+				<div class="d-flex flex-row justify-content-between mb-2">
+					<small class="font-italic text-muted"> Maximum 100 characters (<span id="title-detail-remain">100</span> remaining)</small>
+					<small id="title-detail-char" class="text-muted">0</small>
+				</div>
+
 				<div class="form-group row">
 					<label class="sr-only">Visibility: </label>
 					<div class="form-check form-check-inline">

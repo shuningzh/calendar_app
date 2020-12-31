@@ -44,8 +44,62 @@ $(".close").on("click", function(event) {
 	$(".new-diary-wrapper").fadeOut("slow", function() {
 		$("#title").val("");
 		$("#content").val("");
+		$("#title").next().next().css("display", "none");
+
+		$("#title-char").text(0);
+		$("#title-remain").text(100);
+		$("#title-char").addClass("text-muted");
+		$("#title-char").prev().addClass("text-muted");
+		$("#title-char").removeClass("text-danger");
+		$("#title-char").prev().removeClass("text-danger");
+
+		$("#content-char").text(0);
+		$("#content-remain").text(4000);
+		$("#content-char").addClass("text-muted");
+		$("#content-char").prev().addClass("text-muted");
+		$("#content-char").removeClass("text-danger");
+		$("#content-char").prev().removeClass("text-danger");
 	});
 	$("body").css("overflow", "auto")
+});
+
+$("#title").on("input", function() {
+	let len = $(this).val().length;
+	$("#title-char").text(len);
+	if (len != 0) {
+		$("#title").next().next().css("display", "none");
+	}
+	if (len > 100) {
+		$("#title-remain").parent().addClass("text-danger");
+		$("#title-char").addClass("text-danger");
+		$("#title-remain").parent().removeClass("text-muted");
+		$("#title-char").removeClass("text-muted");
+		$("#title-remain").text(0);
+	} else {
+		$("#title-remain").parent().addClass("text-muted");
+		$("#title-char").addClass("text-muted");
+		$("#title-remain").parent().removeClass("text-danger");
+		$("#title-char").removeClass("text-danger");
+		$("#title-remain").text(100 - len);
+	}
+});
+
+$("#content").on("input", function() {
+	let len = $(this).val().length;
+	$("#content-char").text(len);
+	if (len > 4000) {
+		$("#content-remain").parent().addClass("text-danger");
+		$("#content-char").addClass("text-danger");
+		$("#content-remain").parent().removeClass("text-muted");
+		$("#content-char").removeClass("text-muted");
+		$("#content-remain").text(0);
+	} else {
+		$("#content-remain").parent().addClass("text-muted");
+		$("#content-char").addClass("text-muted");
+		$("#content-remain").parent().removeClass("text-danger");
+		$("#content-char").removeClass("text-danger");
+		$("#content-remain").text(4000 - len);
+	}
 });
 
 
@@ -54,14 +108,18 @@ $(".diary-form form").on("submit", function(event) {
 	let title = $.trim($("#title").val());
 	$("#title").val(title);
 	if (title.length == 0) {
-		$("#title + .error").css("display", "block");
+		$("#title").next().next().css("display", "block");
+	} else if (title.length > 100) {
+		return;
 	} else {
-		$("#title + .error").css("display", "none");
+		$("#title").next().next().css("display", "none");
 		let content = $("#content").val();
 		if (content.length == 0) {
 			if ( !confirm("Are you sure to submit an empty diary?") ) {
 				return;
 			}
+		} else if (content.length > 4000) {
+			return;
 		}
 		let vis = $("input:radio[name='visibility']:checked").val();
 		let d = new Date();
@@ -91,6 +149,18 @@ $(".diary-form form").on("submit", function(event) {
 					$("body").css("overflow", "auto");
 					$("input[name=visibility]").prop("checked", false);
 					$("input[name=visibility][value='0']").prop("checked", true);
+					$("#title-char").text(0);
+					$("#title-remain").text(100);
+					$("#title-char").addClass("text-muted");
+					$("#title-char").prev().addClass("text-muted");
+					$("#title-char").removeClass("text-danger");
+					$("#title-char").prev().removeClass("text-danger");
+					$("#content-char").text(0);
+					$("#content-remain").text(4000);
+					$("#content-char").addClass("text-muted");
+					$("#content-char").prev().addClass("text-muted");
+					$("#content-char").removeClass("text-danger");
+					$("#content-char").prev().removeClass("text-danger");
 				} else {
 					alert("error");
 				}
@@ -165,11 +235,32 @@ $("#edit-btn").on("click", function(event) {
 	$("#detail-title").val($("#view-title").text());
 	$("input[name=visibility2][value=" + onEdit.data("visibility") + "]").prop("checked", "checked");
 	$("#detail-content").val($("#view-content").text());
+	$("#title-detail-char").text($("#view-title").text().length);
 	$("#remain-char").text(4000 - $("#view-content").text().length);
 	$("#char-num").text($("#view-content").text().length);
+	$("#detail-content").next().children().addClass("text-muted");
+	$("#detail-content").next().children().removeClass("text-danger");
 	$("#view-edit").fadeOut("slow", function() {
 		$("#edit-detail").fadeIn("slow");
 	});
+});
+
+$("#detail-title").on("input", function() {
+	let len = $(this).val().length;
+	$("#title-detail-char").text(len);
+	if (len > 100) {
+		$("#title-detail-remain").parent().addClass("text-danger");
+		$("#title-detail-char").addClass("text-danger");
+		$("#title-detail-remain").parent().removeClass("text-muted");
+		$("#title-detail-char").removeClass("text-muted");
+		$("#title-detail-remain").text(0);
+	} else {
+		$("#title-detail-remain").parent().addClass("text-muted");
+		$("#title-detail-char").addClass("text-muted");
+		$("#title-detail-remain").parent().removeClass("text-danger");
+		$("#title-detail-char").removeClass("text-danger");
+		$("#title-detail-remain").text(100 - len);
+	}
 });
 
 $("#edit-detail").on("submit", function(event) {
@@ -178,6 +269,8 @@ $("#edit-detail").on("submit", function(event) {
 	$("#detail-title").val(title);
 	if (title.length == 0) {
 		alert("Title cannot be empty");
+	} else if (title.length > 100) {
+		return;
 	} else {
 		let content = $("#detail-content").val();
 		let vis = $("input:radio[name='visibility2']:checked").val();
