@@ -216,17 +216,14 @@ $(".wrapper").on("click", ".card .btn-outline-danger", function(event) {
 
 $(".cancel-btn").on("click", function(event) {
 	$("body").css("overflow", "auto");
-	if ($(window).width() < 767) {
-		$("#diary-detail").animate({height:'toggle'}, "slow", function() {
-			$("#view-edit").show();
-			$("#edit-detail").hide();
-		});
-	} else {
-		$("#diary-detail").animate({height:'toggle'}, 900, function() {
-			$("#view-edit").show();
-			$("#edit-detail").hide();
-		});
-	}
+	$("#diary-detail").animate({height:'toggle'}, "slow", function() {
+		$("#view-edit").show();
+		$("#edit-detail").hide();
+		$("#title-detail-remain").parent().addClass("text-muted");
+		$("#title-detail-char").addClass("text-muted");
+		$("#title-detail-remain").parent().removeClass("text-danger");
+		$("#title-detail-char").removeClass("text-danger");
+	});
 
 
 });
@@ -236,6 +233,8 @@ $("#edit-btn").on("click", function(event) {
 	$("input[name=visibility2][value=" + onEdit.data("visibility") + "]").prop("checked", "checked");
 	$("#detail-content").val($("#view-content").text());
 	$("#title-detail-char").text($("#view-title").text().length);
+	$("#title-detail-remain").text(100 - $("#view-title").text().length);
+
 	$("#remain-char").text(4000 - $("#view-content").text().length);
 	$("#char-num").text($("#view-content").text().length);
 	$("#detail-content").next().children().addClass("text-muted");
