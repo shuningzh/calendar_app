@@ -176,11 +176,16 @@ else {
 				<div class="form-group">
 					<label for="title" class="sr-only">Title</label>
 					<input type="text" class="form-control" id="title" placeholder="Title">
+					<div class="d-flex flex-row justify-content-between">
+						<small class="font-italic text-muted"> Maximum 100 characters (<span id="title-remain-char"></span> remaining)</small>
+						<small id="title-char-num" class="text-muted"></small>
+					</div>
 					<small class="error">Empty Title!</small>
 				</div>
 				<div class="form-group">
 					<label for="location" class="sr-only">Location</label>
 					<input type="text" class="form-control" id="location" placeholder="Location">
+					<small class="d-block text-right text-muted"><span></span>/256</small>
 				</div>
 				<div class="form-row">
 					<div class="form-group col-12 col-md-6">
@@ -218,11 +223,16 @@ else {
 				<div class="form-group">
 					<label for="dtitle" class="sr-only">Title</label>
 					<input type="text" class="form-control" id="dtitle" placeholder="Title">
+					<div class="d-flex flex-row justify-content-between">
+						<small class="font-italic text-muted"> Maximum 100 characters (<span id="dtitle-remain-char"></span> remaining)</small>
+						<small id="dtitle-char-num" class="text-muted"></small>
+					</div>
 					<small class="error">Empty Title!</small>
 				</div>
 				<div class="form-group">
 					<label for="dlocation" class="sr-only">Location</label>
 					<input type="text" class="form-control" id="dlocation" placeholder="Location">
+					<small class="d-block text-right text-muted"><span></span>/256</small>
 				</div>
 				<div class="form-row">
 					<div class="form-group col-12 col-md-6">
