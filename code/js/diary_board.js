@@ -135,7 +135,6 @@ $("#dcards").on("click", ".card-header .like", function(event) {
 		if (icon.hasClass("far")) {
 			let data = "like=yes&id=" + card.data("id") + "&userid=" + current_user_id;
 			ajaxDiaries(data, function(results) {
-				console.log(results);
 				if (isJson(results)) {
 					results = JSON.parse(results);
 					if (results["success"] == true) {
